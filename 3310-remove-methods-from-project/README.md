@@ -4,13 +4,14 @@
 <h3> Note :</h3>
   <p> if nonSuspecious  to suspecious in this consider all the nodes, otherwise consider only unvisited nodes, apply DFS on Directed Graph for finding all suspected nodes, then use above logic to find   remaining methods after removing all the suspicious methods. </p>
 </div>
-<h3> 
+<hr/>
+<div> 
 	<h2>Optimal Coplexity Analysis </h2>
 <ul>
 	<li>Time Complexity : O(log(MaxValue(nums[i))</li>
  	<li>Space Complexity : O(1)</li>
 </ul>
-</h3>
+</div>
 
 
 
