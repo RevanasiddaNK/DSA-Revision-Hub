@@ -1,9 +1,14 @@
 <b>
 	Find the break-point, i: Break-point means the first index i from the back of the given array where arr[i] becomes smaller than arr[i+1].
-	Time Complexity : O(N)
- 	Space Complexity : O(N)
-
 </b>
+
+<h3>
+<ul>
+	<li>Time Complexity : O(N)</li>
+ 	<li>Space Complexity : O(N)</li>
+</ul>
+
+</h3>
 
 <h2><a href="https://leetcode.com/problems/next-permutation">31. Next Permutation</a></h2><h3>Medium</h3><hr><p>A <strong>permutation</strong> of an array of integers is an arrangement of its members into a sequence or linear order.</p>
 
