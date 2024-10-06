@@ -1,3 +1,13 @@
+<b> int maxDecimal = max({
+ (s1 + s2 + s3),
+ (s1 + s3 + s2),
+  (s2 + s1 + s3),
+ (s3 + s1 + s2),
+  (s2 + s3 + s1),
+  (s3 + s2 + s1)
+    }); works why?? and Prove it??
+</b>
+
 <h2><a href="https://leetcode.com/problems/maximum-possible-number-by-binary-concatenation">3309. Maximum Possible Number by Binary Concatenation</a></h2><h3>Medium</h3><hr><p>You are given an array of integers <code>nums</code> of size 3.</p>
 
 <p>Return the <strong>maximum</strong> possible number whose <em>binary representation</em> can be formed by <strong>concatenating</strong> the <em>binary representation</em> of <strong>all</strong> elements in <code>nums</code> in some order.</p>
@@ -37,12 +47,3 @@
 	<li><code>1 &lt;= nums[i] &lt;= 127</code></li>
 </ul>
 
-<b> int maxDecimal = max({
- (s1 + s2 + s3),
- (s1 + s3 + s2),
-  (s2 + s1 + s3),
- (s3 + s1 + s2),
-  (s2 + s3 + s1),
-  (s3 + s2 + s1)
-    }); works why??
-</b>
