@@ -36,3 +36,13 @@
 	<li><code>nums.length == 3</code></li>
 	<li><code>1 &lt;= nums[i] &lt;= 127</code></li>
 </ul>
+
+<p> int maxDecimal = max({
+ (s1 + s2 + s3),
+ (s1 + s3 + s2),
+  (s2 + s1 + s3),
+ (s3 + s1 + s2),
+  (s2 + s3 + s1),
+  (s3 + s2 + s1)
+    }); works why??
+</p>
