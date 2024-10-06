@@ -1,4 +1,5 @@
-<b> int maxDecimal = max({
+<b>
+	<b> int maxDecimal = max({
  (s1 + s2 + s3),
  (s1 + s3 + s2),
   (s2 + s1 + s3),
@@ -9,6 +10,20 @@
 Learn Binary to Decimal and   Decimal to Binary & prove max(Binary Concatination ) gives correct ans why?? Binary function that accepts two values of type T as arguments, and returns a value convertible to bool. The value returned indicates whether the element passed as first argument is considered less than the second.
     
 </b>
+</b>
+
+<h3> 
+	<h2>Optimal Coplexity Analysis </h2>
+<ul>
+	<li>Time Complexity : O(log(MaxValue(nums[i))</li>
+ 	<li>Space Complexity : O(1)</li>
+</ul>
+</h3>
+
+
+
+
+
 
 <h2><a href="https://leetcode.com/problems/maximum-possible-number-by-binary-concatenation">3309. Maximum Possible Number by Binary Concatenation</a></h2><h3>Medium</h3><hr><p>You are given an array of integers <code>nums</code> of size 3.</p>
 
