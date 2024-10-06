@@ -8,9 +8,15 @@
 <div> 
 	<h2>Optimal Coplexity Analysis </h2>
 <ul>
-	<li>Time Complexity : O(log(MaxValue(nums[i))</li>
- 	<li>Space Complexity : O(1)</li>
+    <li><b>Time Complexity:</b></li>
+    <ul>
+        <li>Building the graph: O(E), where E is the number of edges.</li>
+        <li>DFS traversal: O(V + E), where V is the number of nodes.</li>
+        <li>Constructing the result: O(V), as you iterate through all the nodes.</li>
+    </ul>
+    <li><b>Space Complexity:</b> O(V), where V is the number of nodes, due to the visited array and adjacency list.</li>
 </ul>
+
 </div>
 
 
