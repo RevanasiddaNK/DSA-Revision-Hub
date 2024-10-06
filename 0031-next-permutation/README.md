@@ -6,7 +6,7 @@
 	<h2>Optimal Coplexity Analysis </h2>
 <ul>
 	<li>Time Complexity : O(N)</li>
- 	<li>Space Complexity : O(N)</li>
+ 	<li>Space Complexity : O(1)</li>
 </ul>
 </h3>
 
