@@ -1,9 +1,9 @@
 
 
-
-<h3> Note :
+</div>
+<h3> Note :</h3>
   <p> if nonSuspecious  to suspecious in this consider all the nodes, otherwise consider only unvisited nodes, apply DFS on Directed Graph for finding all suspected nodes, then use above logic to find   remaining methods after removing all the suspicious methods. </p>
-</h3>
+</div>
 <h3> 
 	<h2>Optimal Coplexity Analysis </h2>
 <ul>
