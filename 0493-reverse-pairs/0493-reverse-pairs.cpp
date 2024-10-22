@@ -1,39 +1,31 @@
 class Solution {
 public:
 
-     int countPairs(vector<int>& nums,int s, int m, int e){
-
-        int count = 0;
+    void countReversePairs( vector<int>&nums, int s, int m, int e, int &count ) {
+        /*
+        for(int i=e; i>m; i--){
+            for(int j=s; j<=m; j++){
+                if(nums[j]/2.00 > nums[i]  ){
+                    count += (m+1-j);
+                    break;
+                }
+            }
+        }
+        */
         int j= m+1;
         for(int i=s; i<=m; i++){
             while(j<=e && nums[i]/2.00 > nums[j]  )
                 j++;
             count += (j-(m+1));
         }
-        return count;
-     }
-
-  int  mergeSort(vector<int>& nums,int s, int e){
-        if(e-s <= 0)
-            return 0;
-
-        int m = (s+e)/2;
-
-        int count = mergeSort(nums, s,m);
-        count += mergeSort(nums, m+1 ,e);
-        count += countPairs(nums,s, m ,e);
-        merge(nums,s,m,e);
-        return count;
-       
     }
 
-    void merge(vector<int>& nums,int s, int m, int e){
-
-        int i=s;
-        int j=m+1;
+    void mergeSortedArrays( vector<int>&nums, int s, int m, int e ){
+        int i=s, j=m+1;
         vector<int>temp;
+
         while(i <= m && j <= e){
-            if( nums[i] <= nums[j] ){
+            if(nums[i] <= nums[j]){
                 temp.push_back(nums[i++]);
             }
             else{
@@ -41,7 +33,7 @@ public:
             }
         }
 
-        while(i<=m){
+        while(i <= m){
             temp.push_back(nums[i++]);
         }
 
@@ -49,17 +41,32 @@ public:
             temp.push_back(nums[j++]);
         }
 
-        for(int k=0; k< temp.size(); k++)
-            nums[s+k] = temp[k];
+        int k=0;
+        for(int i=s; i<=e; i++ ){
+            nums[i] = temp[k++];
+        }
 
-    
     }
 
+    void mergeSort(vector<int>& nums, int s, int e, int &count){
+        
+        if(s < e){
+
+            int m = s+(e-s)/2;
+            mergeSort( nums, s, m, count);
+            mergeSort( nums, m+1, e, count);
+            countReversePairs(nums, s, m, e, count);
+            mergeSortedArrays(nums, s, m, e);
+
+        }
+
+    }
+
+
     int reversePairs(vector<int>& nums) {
-        int n = nums.size();
         int count = 0;
-        
-       return mergeSort(nums, 0,n-1);
-        
+        int s=0, e=nums.size()-1;
+        mergeSort(nums, s, e, count);
+        return count;
     }
 };
