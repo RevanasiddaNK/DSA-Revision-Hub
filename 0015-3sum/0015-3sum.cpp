@@ -8,10 +8,13 @@ public:
 
         for(int i=0; i<n; i++){
 
+            if(i != 0 && nums[i] == nums[i-1])
+                continue;
+
             int s=i+1, e=n-1;
 
             while(s < e){
-                double sum = nums[i]/3.00 + nums[s]/3.00 + nums[e]/3.00;
+                double sum = nums[i] + nums[s] + nums[e];
 
                 if(sum == 0){
                     ans.push_back({nums[i], nums[s], nums[e] });
@@ -31,10 +34,7 @@ public:
                     e--;
             }
 
-            int k = nums[i];
-            while(i < n && k == nums[i])
-                i++;
-            i--;
+           
             
         }
         return ans;
