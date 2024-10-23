@@ -9,6 +9,9 @@ public:
             if(mp.find(s) != mp.end()){
                 count++;
             }
+            if(count >= 2 ){
+                return 1;
+        }
         }
         if(count >= 2 ){
             return 1;
