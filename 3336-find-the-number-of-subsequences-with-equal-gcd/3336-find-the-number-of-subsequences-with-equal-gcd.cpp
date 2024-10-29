@@ -72,7 +72,7 @@ public:
         //return getCount(nums, 0, 0, 0,dp )-1;
         int n = nums.size();
 
-        vector<vector<vector<int> > >dp(n, vector<vector<int> >(200, vector<int>(200, -1)));
+        vector<vector<vector<int> > >dp(n+1, vector<vector<int> >(201, vector<int>(201, -1)));
         //dp[0][0][0] = 1;
 
         return getCountMem(nums,0,0,0, dp) -1;
