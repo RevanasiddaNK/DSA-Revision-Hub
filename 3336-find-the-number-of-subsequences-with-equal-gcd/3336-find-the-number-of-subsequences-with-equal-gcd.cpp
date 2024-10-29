@@ -1,7 +1,8 @@
 
 class Solution {
 public:
-    const int MOD = 1000000007;
+    const int MOD = 1e9 + 7;
+    const int MX = 200;  
 
     // Function to calculate GCD of two numbers
     int getGCD2Num(int a, int b) {
@@ -64,6 +65,52 @@ public:
         return dp[i][gcd1][gcd2] = add(g1, g2, g3);
     }
 
+     int subsequencePairCountSpaceOpt(vector<int>&a) {
+        int n = a.size();
+        
+        // 2D DP table to count pairs of subsequences with GCD x and y
+        vector<vector<int>> dp(MX + 1, vector<int>(MX + 1, 0));
+        
+        // Initialize dp[0][0] = 1, representing the count for two empty subsequences
+        dp[0][0] = 1;
+        
+        // Process each element in the input array
+        for (int i = 0; i < n; i++) {
+            // Temporary DP table for updates on current element `a[i]`
+            vector<vector<int>>ndp(MX + 1, vector<int>(MX + 1, 0));
+            
+            // Traverse all GCD pairs (x, y) in the dp table
+            for (int x = 0; x <= MX; x++) {
+                for (int y = 0; y <= MX; y++) {
+                    if (dp[x][y] == 0) continue; // Skip if no pairs with GCDs x and y
+
+                    // Option 1: Do not include `a[i]` in either subsequence
+                    ndp[x][y] = add(ndp[x][y], dp[x][y],0);
+                    
+                    // Option 2: Include `a[i]` in the first subsequence, update its GCD
+                    int newGCD1 = gcd(x, a[i]);
+                    ndp[newGCD1][y] = add(ndp[newGCD1][y], dp[x][y],0);
+                    
+                    // Option 3: Include `a[i]` in the second subsequence, update its GCD
+                    int newGCD2 = gcd(y, a[i]);
+                    ndp[x][newGCD2] = add(ndp[x][newGCD2], dp[x][y],0);
+                }
+            }
+            
+            // Update the dp table with values from the current element's ndp
+            dp = ndp;
+        }
+        
+        int ans = 0;
+        // Sum counts where both subsequences have the same GCD `i`
+        for (int i = 1; i <= MX; i++) {
+            ans = add(ans, dp[i][i],0);
+        }
+        
+        return ans;
+    }
+
+
     int subsequencePairCount(vector<int>& nums) {
         // Edge case: If nums is empty or contains only one element, no valid pairs are possible
         if (nums.size() < 2) {
@@ -72,13 +119,21 @@ public:
         //return getCount(nums, 0, 0, 0,dp )-1;
         int n = nums.size();
 
-        vector<vector<vector<int> > >dp(n+1, vector<vector<int> >(201, vector<int>(201, -1)));
-        //dp[0][0][0] = 1;
+        vector<vector<vector<int> > >dp(n+1, vector<vector<int> >(MX+1 , vector<int>(MX+1, -1)));
+        //return getCountMem(nums,0,0,0, dp) -1;
 
-        return getCountMem(nums,0,0,0, dp) -1;
 
+        return subsequencePairCountSpaceOpt(nums);
 
      
         
     }
 };
+
+/*
+TC : O(3^N*N)
+SC : O(N^3) dp & O(N) recursive call stack
+Revise space optimix=zed sol while studying dp
+*/
+
+
