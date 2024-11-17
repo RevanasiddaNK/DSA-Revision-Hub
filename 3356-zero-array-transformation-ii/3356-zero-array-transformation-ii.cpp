@@ -7,7 +7,7 @@ public:
        int n1 = nums.size();
         vector<int>sweep(n1, 0);
 
-        for(int i=0; i <= n; i++){
+        for(int i=0; i < n; i++){
             sweep[ queries[i][0] ] += queries[i][2];
             if( queries[i][1] + 1 < n1 ){
                 sweep[ queries[i][1] + 1] -= queries[i][2];
@@ -35,7 +35,7 @@ public:
         int n = queries.size();
 
         // Monotonic Predicate state to K => Binary Search bcx FFFFFF  left <-T ->right TTTTTTT
-        int s=0, e=n-1;
+        int s=0, e=n;
         while(s <= e){
 
             int m = s+(e-s)/2;
@@ -48,7 +48,7 @@ public:
                 s = m+1;
         }
 
-        return (ans == -1 || ans == 0)?  ans : ans+1 ;
+        return ans ;
     }
 };
 
