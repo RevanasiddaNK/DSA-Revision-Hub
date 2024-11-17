@@ -4,32 +4,19 @@ public:
     bool isValidSelection(vector<int>nums, int c, bool r){
         int i=c, n= nums.size();
         while(i >= 0 && i<n ){
-            if(r){
-                while(i < n){
+    
+                while(i < n && i >= 0){
                     if(nums[i] == 0)
-                        i++;
+                        r == 1 ? i++ : i--;
                     else if(nums[i] > 0){
                         nums[i]--;
+                        r == 0 ? i++ : i--;
                         r = !r;
-                        i--;
                         break;
                     }
                 }
-            }
-
-            if(!r){
-                 while(i >= 0){
-                    if(nums[i] == 0)
-                        i--;
-                    else if(nums[i] > 0){
-                        nums[i]--;
-                        r = !r;
-                        i++;
-                        break;
-                    }
-                }
-            }
         }
+        
 
         for(i=0; i<nums.size(); i++){
             if(nums[i] != 0)
