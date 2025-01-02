@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxProduct(vector<int>& nums) {
         
-        int totalMax =  *max_element(nums.begin(), nums.end());
+        int totalMax = INT_MIN;
         int maxi = 1, mini = 1;
         for(int i=0; i<nums.size(); i++){
             int tempMini =  mini;   
@@ -13,3 +13,7 @@ public:
         return totalMax;
     }
 };
+/*
+    TC : O(N)
+    SC : O(N)
+*/
