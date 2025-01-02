@@ -1,27 +1,15 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        //observation based sol using prefix, suffix 
-        int res = INT_MIN;
-        int pref=1, suf=1;
-        int n = nums.size();
-        for(int i=0; i<nums.size(); i++){
         
-            if(pref == 0)
-                pref = 1;
-            if(suf == 0)
-                suf = 1;
-
-            pref *= nums[i];
-            suf *= nums[n-i-1];
-            res = max(res,  max(pref,suf));
+        int totalMax =  *max_element(nums.begin(), nums.end());
+        int maxi = 1, mini = 1;
+        for(int i=0; i<nums.size(); i++){
+            int tempMini =  mini;   
+           mini = min({nums[i], maxi*nums[i], mini*nums[i]});
+           maxi = max({nums[i], maxi*nums[i], tempMini*nums[i]});
+           totalMax = max( totalMax, maxi);
         }
-
-
-        return res;
+        return totalMax;
     }
 };
-/*
-TC : O(N)
-SC : O(1)
-*/
