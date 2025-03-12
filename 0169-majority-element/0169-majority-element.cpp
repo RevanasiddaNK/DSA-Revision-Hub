@@ -1,8 +1,9 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        int cad=nums[0],vote=1;
-        for(int i=1; i<nums.size(); i++){
+        //boy more algorithm
+        int cad=INT_MIN,vote=0;
+        for(int i=0; i<nums.size(); i++){
             if(vote == 0){
                 cad = nums[i];
                 vote = 1;
