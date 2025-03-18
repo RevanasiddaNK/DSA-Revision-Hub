@@ -17,7 +17,7 @@
         ans.push_back(root->val);
         traversal(ans, root->left);
         traversal(ans, root->right);
-    }
+}
 
 
 class Solution {
@@ -25,7 +25,30 @@ public:
     vector<int> preorderTraversal(TreeNode* root) {
 
         vector<int>ans;
-        traversal(ans, root);
+        TreeNode* curr = root;
+        while(curr != NULL){
+            
+            if(curr->left == NULL){
+                ans.push_back(curr->val);
+                curr = curr->right;
+            }else{
+                TreeNode* prev = curr->left;
+                while(prev->right && prev->right != curr)
+                    prev = prev->right;
+                if(prev->right == NULL){
+                    prev->right = curr;
+                    ans.push_back(curr->val);
+                    curr = curr->left;
+                }
+                else if(prev->right == curr){
+                    prev->right = NULL;
+                    curr = curr->right;
+                }
+            }
+        }
+
+
+
         return ans;
     }
 };
