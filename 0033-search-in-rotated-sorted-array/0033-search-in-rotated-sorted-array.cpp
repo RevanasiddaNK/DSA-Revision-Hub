@@ -30,3 +30,8 @@ public:
         return -1;
     }
 };
+/*
+1. find out where is mid lying ?
+2. if its lying in left part, check wether target lies in left part, if does consider left otherwise ignore right, same for right part too
+
+*/
