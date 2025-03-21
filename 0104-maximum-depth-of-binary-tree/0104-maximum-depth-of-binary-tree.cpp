@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-
+//[Approach 1] Using Recursion – O(n) Time and O(h) Space
     int solve1(TreeNode* root) {
         if(root == NULL){
             return 0;
@@ -22,7 +22,38 @@ public:
         return max(l,r)+1;
     }
 
+//[Approach 2] Level Order Traversal using Null Delimiter – O(n) Time and O(n) Space
+    int solve2(TreeNode* root) {
+        queue<TreeNode*>q;
+        q.push(root);
+        q.push(NULL);
+        int h = 0;
+        while(!q.empty()){
+           TreeNode* curr = q.front();
+           q.pop();
+
+           if(curr == NULL){
+                h++;
+                if(!q.empty())
+                    q.push(NULL);
+           }else{
+                if(curr->left)  q.push(curr->left);
+                if(curr->right)  q.push(curr->right);
+
+           }
+           
+        }
+        return h;
+    }
+
     int maxDepth(TreeNode* root) {
-        return solve1(root);
+        if(root == NULL)
+            return 0;
+            
+        int ans = -1;
+        //ans =  solve1(root);
+        ans = solve2(root); 
+
+        return ans;
     }
 };
