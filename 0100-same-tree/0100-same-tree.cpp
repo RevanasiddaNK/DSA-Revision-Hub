@@ -12,7 +12,7 @@
 class Solution {
 public:
 
-    bool isSameTree(TreeNode* p, TreeNode* q) {
+    bool DFSSolution(TreeNode* p, TreeNode* q) {
         if(p == NULL && q == NULL){
             return 1;
         }else if(p == NULL || q == NULL){
@@ -20,9 +20,16 @@ public:
         }
         if(p->val != q->val)
             return 0;
-        bool l = isSameTree(p->left, q->left);
-        bool r = isSameTree(p->right, q->right);
+        bool l = DFSSolution(p->left, q->left);
+        bool r = DFSSolution(p->right, q->right);
 
         return l&&r;
+    }
+
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        bool ans = false;
+        ans =  DFSSolution(p,q);
+
+        return ans;
     }
 };
