@@ -46,13 +46,31 @@ public:
         return h;
     }
 
+    int solve3(TreeNode* root) {
+        queue<TreeNode*>q;
+        q.push(root);
+        int h = 0;
+        while(!q.empty()){
+            int n = q.size();
+            for(int i=0; i<n; i++){
+                TreeNode* curr = q.front();
+                q.pop();
+                if(curr->left)  q.push(curr->left);
+                if(curr->right)  q.push(curr->right);
+            }
+            h++;
+        }
+        return h;
+    }
+
     int maxDepth(TreeNode* root) {
         if(root == NULL)
             return 0;
-            
+
         int ans = -1;
         //ans =  solve1(root);
-        ans = solve2(root); 
+        //ans = solve2(root); 
+        ans = solve3(root); 
 
         return ans;
     }
