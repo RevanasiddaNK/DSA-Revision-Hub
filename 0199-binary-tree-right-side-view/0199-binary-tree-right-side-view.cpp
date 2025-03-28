@@ -12,7 +12,7 @@
 class Solution {
 public:
 
-    void solveDFS(TreeNode* root, int lvl, int &maxLevel, vector<int>&ans){
+    void RecursiveRightView(TreeNode* root, int lvl, int &maxLevel, vector<int>&ans){
 
         if(!root)
             return;
@@ -22,8 +22,8 @@ public:
            maxLevel = lvl;
         }
 
-        solveDFS(root->right, lvl+1, maxLevel, ans);
-        solveDFS(root->left, lvl+1, maxLevel, ans);
+        RecursiveRightView(root->right, lvl+1, maxLevel, ans);
+        RecursiveRightView(root->left, lvl+1, maxLevel, ans);
         
 
     }
@@ -32,7 +32,7 @@ public:
     vector<int> rightSideView(TreeNode* root) {
         vector<int>ans;
         int maxLevel = -1;
-        solveDFS(root, 0, maxLevel, ans);
+        RecursiveRightView(root, 0, maxLevel, ans);
 
         return ans;
     }
