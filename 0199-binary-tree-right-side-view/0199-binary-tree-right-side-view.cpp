@@ -12,17 +12,18 @@
 class Solution {
 public:
 
-    void solveDFS(TreeNode* root, int lvl, int hd, unordered_map<int, pair<int,int> >&mp){
+    void solveDFS(TreeNode* root, int lvl, int &maxLevel, vector<int>&ans){
 
         if(!root)
             return;
 
-        if(mp.find(lvl) == mp.end() ){
-            mp[lvl] = make_pair(root->val, hd);
+        if(lvl > maxLevel ){
+           ans.push_back(root->val);
+           maxLevel = lvl;
         }
 
-        solveDFS(root->right, lvl+1, hd+1, mp);
-        solveDFS(root->left, lvl+1, hd-1, mp);
+        solveDFS(root->right, lvl+1, maxLevel, ans);
+        solveDFS(root->left, lvl+1, maxLevel, ans);
         
 
     }
@@ -30,15 +31,9 @@ public:
 
     vector<int> rightSideView(TreeNode* root) {
         vector<int>ans;
-        // level -> val,hd(hd is maximized)
-        unordered_map<int, pair<int,int> >mp;
+        int maxLevel = -1;
+        solveDFS(root, 0, maxLevel, ans);
 
-        solveDFS(root, 0, 0, mp);
-        int lvl = 0;
-        while(mp.find(lvl) != mp.end() ){
-            ans.push_back( mp[lvl].first );
-            lvl++;
-        }
         return ans;
     }
 };
