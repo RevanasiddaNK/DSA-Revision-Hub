@@ -68,34 +68,33 @@ public:
 
 //  3] Using Morris Traversal – O(n) Time and O(1) Space
     void MorrisRightView(TreeNode* root, vector<int>&res){
-       int level = 0;
+       int lvl = 0;
+       
         while(root){
             if(root->right){
-                TreeNode* pred = root->right;
                 int bd = 1;
+                TreeNode* pred = root->right;
                 while(pred->left != NULL && pred->left != root){
                     pred = pred->left;
                     bd++;
                 }
 
                 if(pred->left == NULL){
-                    if(level == res.size()){
-                        res.push_back(root->val);
-                    }
                     pred->left = root;
+                    if(lvl == res.size())
+                        res.push_back(root->val);
+                    lvl++;
                     root = root->right;
-                    level++;
-                }
-                else{
+                }else{
                     pred->left = NULL;
-                    level -= bd;
+                    lvl -= bd;
                     root = root->left;
                 }
+
             }else{
-                if(level == res.size()){
+                if(lvl == res.size())
                     res.push_back(root->val);
-                }
-                level++;
+                lvl++;
                 root = root->left;
             }
         }
