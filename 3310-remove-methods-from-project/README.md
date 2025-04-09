@@ -1,28 +1,4 @@
-
-
-</div>
-<h3> Note :</h3>
-  <p> if nonSuspecious  to suspecious in this consider all the nodes, otherwise consider only unvisited nodes, apply DFS on Directed Graph for finding all suspected nodes, then use above logic to find   remaining methods after removing all the suspicious methods. </p>
-</div>
-<hr/>
-<div> 
-	<h2>Optimal Coplexity Analysis </h2>
-<ul>
-    <li><b>Time Complexity:</b></li>
-    <ul>
-        <li>Building the graph: O(E), where E is the number of edges.</li>
-        <li>DFS traversal: O(V + E), where V is the number of nodes.</li>
-        <li>Constructing the result: O(V), as you iterate through all the nodes.</li>
-    </ul>
-    <li><b>Space Complexity:</b> O(V), where V is the number of nodes, due to the visited array and adjacency list.</li>
-</ul>
-
-</div>
-
-
-
-
-<h2><a href="https://leetcode.com/problems/remove-methods-from-project/description/">3310. Remove Methods From Project</a></h2><h3>Medium</h3><hr><p>You are maintaining a project that has <code>n</code> methods numbered from <code>0</code> to <code>n - 1</code>.</p>
+<h2><a href="https://leetcode.com/problems/remove-methods-from-project/">3310. Remove Methods From Project</a></h2><h3>Medium</h3><hr><p>You are maintaining a project that has <code>n</code> methods numbered from <code>0</code> to <code>n - 1</code>.</p>
 
 <p>You are given two integers <code>n</code> and <code>k</code>, and a 2D integer array <code>invocations</code>, where <code>invocations[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> indicates that method <code>a<sub>i</sub></code> invokes method <code>b<sub>i</sub></code>.</p>
 
