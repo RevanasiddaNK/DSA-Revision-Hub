@@ -1,34 +1,39 @@
 class Solution {
 public:
     int longestPalindrome(string s, string t) {
-        int ans = INT_MIN;
+         int ans = INT_MIN;
+      
         int m = s.size(), n = t.size();
-        
-        // starts palin with i
-        vector<vector<bool>>ps(m, vector<bool>(m, false) );
+          // from i till j longest palindrome
+        vector<vector<bool>>ps(m, vector<bool>(m,false));
         vector<int>maxs(m,0);
-        for(int i=m-1; i>=0; i--){
+        for(int i=0; i<m; i++){
             for(int j=i; j<m; j++){
-                ps[i][j] = (i == j) || (i+1 == j && s[i] == s[j]) || ( ps[i+1][j-1] && s[i] == s[j] );
+                ps[i][j] = (i == j) || (i+1 == j && s[i] == s[j]) || (  s[i] == s[j]  && ps[i+1][j-1] );
+
                 if(ps[i][j]){
-                    maxs[i] = max( maxs[i], j-i+1 );
-                    ans = max(ans, j-i+1);
+                    maxs[i] = max( maxs[i] , j-i+1  );
+                    ans = max(ans,  maxs[i]);
                 }
             }
         }
 
-        // ends palin with j
-        vector<vector<bool>>pt(n, vector<bool>(n, false) );
+        vector<vector<bool>>pt(n, vector<bool>(n,false));
         vector<int>maxt(n,0);
-        for(int i=n-1; i>=0; i--){
+        for(int i=n-1; i>= 0; i--){
             for(int j=i; j<n; j++){
-                pt[i][j] = (i == j) || (i+1 == j && t[i] == t[j]) || ( pt[i+1][j-1] && t[i] == t[j] );
+
+                pt[i][j] = (i == j) || (i+1 == j && t[i] == t[j]) || (  t[i] == t[j]  && pt[i+1][j-1] );
+
                 if(pt[i][j]){
-                    maxt[j] = max( maxt[i], j-i+1 );
-                    ans = max(ans, j-i+1);
+                    maxt[j] = max( maxt[j] , j-i+1  );
+                    ans = max(ans,  maxt[j]);
                 }
             }
         }
+
+
+
 
         // dp[i][j] = dp[i-1][j+1] + 2;
         vector<vector<int>>dp(m, vector<int>(n, 0) );
