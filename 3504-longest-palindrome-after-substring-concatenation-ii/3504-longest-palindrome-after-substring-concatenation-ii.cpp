@@ -7,7 +7,7 @@ public:
           // from i till j longest palindrome
         vector<vector<bool>>ps(m, vector<bool>(m,false));
         vector<int>maxs(m,0);
-        for(int i=0; i<m; i++){
+        for(int i=m-1; i>= 0; i--){
             for(int j=i; j<m; j++){
                 ps[i][j] = (i == j) || (i+1 == j && s[i] == s[j]) || (  s[i] == s[j]  && ps[i+1][j-1] );
 
