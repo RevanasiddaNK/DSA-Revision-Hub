@@ -7,7 +7,7 @@ public:
           // from i till j longest palindrome
         vector<vector<bool>>ps(m, vector<bool>(m,false));
         vector<int>maxs(m,0);
-        for(int i=m-1; i>= 0; i--){
+        for(int i=0; i<m; i++){
             for(int j=i; j<m; j++){
                 ps[i][j] = (i == j) || (i+1 == j && s[i] == s[j]) || (  s[i] == s[j]  && ps[i+1][j-1] );
 
@@ -32,26 +32,29 @@ public:
             }
         }
 
-
-
-
-        // dp[i][j] = dp[i-1][j+1] + 2;
-        vector<vector<int>>dp(m, vector<int>(n, 0) );
+        vector<vector<int>>dp(m, vector<int>(n,0));
         for(int i=0; i<m; i++){
-            for(int j=n-1; j>=0; j--){
+            for(int j=n-1; j>= 0; j--){
                 if(s[i] == t[j]){
-                    if(j+1 < n && i-1 >= 0){
-                        dp[i][j] =  dp[i-1][j+1] + 2;
+                    if(i-1 >= 0  && j+1 < n ){
+                        dp[i][j] = 2 + dp[i-1][j+1];
                     }else{
                         dp[i][j] = 2;
                     }
-                    int extra = 0;
-                    if(i+1 < m) extra = max(extra, maxs[i+1]  );
-                    if(j-1 >= 0)  extra = max(extra, maxt[j-1]  );
-                    ans = max(ans, extra + dp[i][j] );
                 }
+
+                int extra = 0;
+                
+                if(i+1 < m)     extra =  max(maxs[i+1], extra);
+                if(j-1 >= 0)   extra =  max(maxt[j-1], extra);
+            
+                
+                ans = max(dp[i][j]+extra, ans);
             }
         }
+
+        
         return ans;
     }
 };
+
