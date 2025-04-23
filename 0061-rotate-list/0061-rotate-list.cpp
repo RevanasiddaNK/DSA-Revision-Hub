@@ -15,7 +15,14 @@ public:
             return head;
         if(!head->next)
             return head;
-            
+        int n=0;
+        ListNode* temp = head;
+        while(temp){
+            temp = temp->next;
+            n++;
+        }
+        k = k%n;
+        
         ListNode* th=head;
         ListNode* tt=head;
         while(k >0){
