@@ -39,16 +39,15 @@ public:
         }
     }
 
-    void flatten(TreeNode* root) {
-        //flattenQueue(root);
-
-        if( !root || ( root->left == NULL && root->right == NULL) )
+    void flattenRec(TreeNode* root) {
+    
+        if( !root || !( root->left || root->right) )
             return;
         
         if(root->left){
 
             TreeNode* tempRight = root->right;
-            flatten(root->left);
+            flattenRec(root->left);
             root->right = root->left;
             root->left = NULL;
             
@@ -57,9 +56,30 @@ public:
                 temp = temp->right;
             
             temp->right = tempRight;
-            flatten(tempRight);
+            flattenRec(tempRight);
         }else{
-            flatten(root->right);
+            flattenRec(root->right);
+        }
+
+    }
+
+    void flatten(TreeNode* root) {
+        //flattenRec(root);
+        TreeNode* curr = root;
+        while(curr){
+            if(curr->left){
+
+                TreeNode* pred = curr->left;
+                while(pred->right)
+                    pred = pred->right;
+                
+                pred->right = curr->right;
+                curr->right = curr->left;
+                curr->left = NULL;
+                curr = curr->right;
+            }else{
+                curr = curr->right;
+            }
         }
 
     }
