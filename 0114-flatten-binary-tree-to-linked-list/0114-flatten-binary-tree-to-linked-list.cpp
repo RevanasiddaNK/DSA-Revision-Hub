@@ -21,8 +21,7 @@ public:
         inOrder(root->right, q);
     }
     
-
-    void flatten(TreeNode* root) {
+    void flattenQueue(TreeNode* root) {
         if(!root)
             return;
         queue<TreeNode*>q;
@@ -38,5 +37,30 @@ public:
             f->left = NULL;
             root = root->right;
         }
+    }
+
+    void flatten(TreeNode* root) {
+        //flattenQueue(root);
+
+        if( !root || ( root->left == NULL && root->right == NULL) )
+            return;
+        
+        if(root->left){
+
+            TreeNode* tempRight = root->right;
+            flatten(root->left);
+            root->right = root->left;
+            root->left = NULL;
+            
+            TreeNode* temp = root;
+            while(temp->right)
+                temp = temp->right;
+            
+            temp->right = tempRight;
+            flatten(tempRight);
+        }else{
+            flatten(root->right);
+        }
+
     }
 };
