@@ -17,8 +17,7 @@ public:
             return 0;
         int left = solve(root->left, ans);
         int right = solve(root->right, ans);
-// ans = max( ans , max( root->val + left  , max( root->val + right , left+ root->val+ right)));
-        ans = std::max({ ans, root->val + left,root->val + right,left+ root->val+ right, root->val  });
+        ans = std::max({ ans, root->val, root->val + left, root->val + right, left+ root->val+ right  });
 
         return   std::max({ root->val + right , root->val + left,0 });
 
