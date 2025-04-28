@@ -21,7 +21,7 @@ public:
     }
 
 
-    bool findTarget(TreeNode* root, int k) {
+    bool findTargetVector(TreeNode* root, int k) {
         vector<int>inorder;
         inorderTraversal(root, inorder);
         int s=0,e=inorder.size()-1;
@@ -35,5 +35,25 @@ public:
                 e--;
         }
         return 0;
+    }
+
+    bool twoSumMap(TreeNode* root, int k, unordered_set<int>&st){
+        if(!root)
+            return 0;
+        if(st.find(k-root->val) != st.end()){
+            return 1;
+        }
+        st.insert(root->val);
+        bool left = twoSumMap(root->left,  k, st);
+        if(left)    return 1;
+        bool right = twoSumMap(root->right,  k, st);
+        return right;
+    }
+
+    bool findTarget(TreeNode* root, int k) {
+        //return findTargetVector(root,k);
+        unordered_set<int> st;
+       // st.insert(0);
+        return twoSumMap(root, k, st);
     }
 };
