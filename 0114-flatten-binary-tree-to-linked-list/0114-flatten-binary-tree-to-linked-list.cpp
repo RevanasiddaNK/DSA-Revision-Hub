@@ -63,7 +63,7 @@ public:
 
     }
 
-    void flatten(TreeNode* root) {
+    void flattenMorris(TreeNode* root) {
         //flattenRec(root);
         TreeNode* curr = root;
         while(curr){
@@ -81,6 +81,37 @@ public:
                 curr = curr->right;
             }
         }
+
+    }
+
+    void flattenStack(TreeNode* root) {
+        stack<TreeNode*>st;
+        st.push(root);
+
+        while(!st.empty()){
+
+            TreeNode* curr = st.top();
+            st.pop();
+
+            if(!curr)   return;
+            if(curr->right) st.push(curr->right);
+            if(curr->left) st.push(curr->left);
+
+            if(!st.empty()){
+                curr->right = st.top();
+                curr->left = NULL;
+            }
+            curr->left = NULL;
+        }
+
+    }
+
+    void flatten(TreeNode* root) {
+
+        //flattenQueue(root);
+        //flattenRec(root);
+        //flattenMorris(root);
+        flattenMorris(root);
 
     }
 };
