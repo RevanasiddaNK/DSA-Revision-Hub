@@ -22,21 +22,27 @@ public:
             n++;
         }
         k = k%n;
-        
-        ListNode* th=head;
-        ListNode* tt=head;
+
+        if(k==0)
+            return head;
+
+        ListNode* th1=head;
+        ListNode* th2=head;
         while(k >0){
-            ListNode* prev = tt;
-            while(tt->next){
-                prev = tt;
-                tt = tt->next;
-            }
-            prev->next = NULL;
-            tt->next = th;
-            th = tt;
-            tt= th;
+            th1 = th1->next;
             k--;
         }
-        return th;
+        
+
+        while(th1->next){
+            th1 = th1->next;
+            th2 = th2->next;
+        }
+        ListNode* nh=th2->next;
+        th2->next = NULL;
+        th1->next = head;
+
+
+        return nh;
     }
 };
