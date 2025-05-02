@@ -17,38 +17,32 @@ public:
             int max;
             int min;
             int sum;
-            bool isBST;
-            BSTInfo(bool isBST, int max, int min, int sum){
+            BSTInfo(int max, int min, int sum ){
                 this->max = max;
                 this->min = min;
                 this->sum = sum;
-                this->isBST = isBST;
             }
     };
-
-    int maxSum = 0;
 
     BSTInfo findmaxSumBST(TreeNode* root){
 
         if(!root){
-            return BSTInfo(true, INT_MIN, INT_MAX, 0);
+            return BSTInfo(INT_MIN, INT_MAX, 0);
         }
 
         BSTInfo left = findmaxSumBST(root->left);
         BSTInfo right = findmaxSumBST(root->right);
 
-        if( (left.isBST && right.isBST)   && (left.max < root->val && root->val < right.min)   ){
-            int totalSum = left.sum + right.sum + root->val;
-            maxSum = max(totalSum, maxSum);
-            return BSTInfo( true, max(root->val, right.max), min(root->val,left.min),  totalSum );
+        if( left.max < root->val && root->val < right.min   ){
+return BSTInfo( max(root->val, right.max)  ,min(root->val,left.min) , (left.sum + right.sum + root->val)  );
         }
 
-        return BSTInfo( false, INT_MAX, INT_MIN, 0);
+        return BSTInfo( INT_MAX, INT_MIN, max(left.sum, right.sum ));
     }
 
 
     int maxSumBST(TreeNode* root) {
-        BSTInfo temp = findmaxSumBST(root);
-        return  maxSum;
+        int ans = findmaxSumBST(root).sum;
+        return ans < 0 ? 0 : ans;
     }
 };
