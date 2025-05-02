@@ -10,7 +10,8 @@
  */
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
+
+    bool isPalindromeUsingArr(ListNode* head) {
         vector<int>arr;
 
         ListNode* curr = head;
@@ -26,5 +27,33 @@ public:
             }
         }
         return 1;
+    }
+
+    bool isPalindromeStack(ListNode* head){
+        stack<int>st;
+        ListNode* curr = head;
+
+        while(curr){
+            st.push(curr->val);
+            curr = curr->next;
+        }
+
+        curr = head;
+
+        while(curr){
+            int f = st.top();
+            st.pop();
+            if(f != curr->val ){
+                return 0;
+            }
+            curr = curr->next;
+        }
+        return 1;
+    }
+
+    bool isPalindrome(ListNode* head){
+        //  return isPalindromeUsingArr(head);
+        return isPalindromeStack(head);
+
     }
 };
