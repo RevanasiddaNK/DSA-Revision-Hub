@@ -1,27 +1,22 @@
 class Solution {
 public:
 
-    int climbStairsMem(int n, vector<int>&dp) {
-        if(n <= 0)
-            return  n+1;
-        if(dp[n]  != -1)
-            return dp[n];
-        return  dp[n] = climbStairsMem(n-1, dp) + climbStairsMem(n-2, dp);
-    }
-
-    int solveTab(int n){
-        vector<int>dp(n+2, -1);
-        dp[0] = 0;
-        dp[1] = 1;
-        for(int i=2; i<n+2; i++){
-            dp[i] = dp[i-1] + dp[i-2];
+    int solve(int i,int n, vector<int>&dp){
+        if(i == n){
+            return 1;
         }
-        return dp[n+1];
+        if(dp[i] != -1)
+            return dp[i];
+        int t = 0;
+        if(i+2 <= n)
+            t = solve(i+2,n,dp);
+        int o = solve(i+1,n,dp);
+        return dp[i] = (t+o);
     }
 
     int climbStairs(int n) {
+      
         vector<int>dp(n+1, -1);
-        //return climbStairsMem(n, dp);
-        return solveTab(n);
+        return solve(0,n, dp);
     }
 };
