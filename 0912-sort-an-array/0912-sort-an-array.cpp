@@ -2,13 +2,13 @@ class Solution {
 public:
 
     void merge(vector<int>& nums, int s, int m, int e){
-        int i=s, j=m+1;
-        vector<int>temp;
+        int i = s, j = m + 1;
+        vector<int> temp;
 
         while(i <= m && j <= e){
             if(nums[i] < nums[j]){
                 temp.push_back(nums[i++]);
-            }else{
+            } else {
                 temp.push_back(nums[j++]);
             }
         }
@@ -21,65 +21,69 @@ public:
             temp.push_back(nums[j++]);
         }
 
-        i=0;
-        for(int i=0; i<=e-s; i++){
-            nums[s+i] = temp[i];
+        for(int k = 0; k < temp.size(); k++){
+            nums[s + k] = temp[k];
         }
     }
 
     void mergeSort(vector<int>& nums, int s, int e){
-        if(s>=e)
-            return;
-        
-        int m = s+(e-s)/2;
+        if(s >= e) return;
 
+        int m = s + (e - s) / 2;
         mergeSort(nums, s, m);
-        mergeSort(nums, m+1, e);
-
-        merge(nums,s,m,e);
-
+        mergeSort(nums, m + 1, e);
+        merge(nums, s, m, e);
     }
 
     int findPivotHoaresPartition(vector<int>& nums, int s, int e){
-        int pivot = nums[s];  // Use first element as pivot for Hoare's scheme
-        int i = s - 1;
-        int j = e + 1;
+        int pivot = nums[s];
+        int i = s - 1, j = e + 1;
 
         while(true) {
-            // Move i to the right
-            do {
-                i++;
-            } while(i <= e && nums[i] < pivot);
+            do { i++; } while(i <= e && nums[i] < pivot);
+            do { j--; } while(j >= s && nums[j] > pivot);
 
-            // Move j to the left
-            do {
-                j--;
-            } while(j >= s && nums[j] > pivot);
-
-            // If pointers cross, partitioning is done
             if(i >= j) return j;
-
             swap(nums[i], nums[j]);
         }
     }
 
-    void quickSort(vector<int>& nums, int s, int e){
-        if(s >= e){
-            return;
+    int LomutoPartition(vector<int>& nums, int s, int e){
+        int i = s - 1;
+        int pivot = nums[e];
+        for(int j = s; j < e; j++){
+            if(nums[j] < pivot){
+                swap(nums[++i], nums[j]);
+            }
         }
-
-        int p = findPivotHoaresPartition(nums, s, e);  // Partition returns the split index
-
-        quickSort(nums, s, p);       // Recur on left part
-        quickSort(nums, p + 1, e);   // Recur on right part
+        swap(nums[i + 1], nums[e]);
+        return i + 1;
     }
 
+    void quickSort(vector<int>& nums, int s, int e){
+        if(s >= e) return;
+
+        // Choose either partition scheme (uncomment one of these):
+
+        // --- Lomuto Partition ---
+        int p = LomutoPartition(nums, s, e);
+        quickSort(nums, s, p - 1);
+        quickSort(nums, p + 1, e);
+
+        // --- Hoare Partition (if using) ---
+        // int p = findPivotHoaresPartition(nums, s, e);
+        // quickSort(nums, s, p);
+        // quickSort(nums, p + 1, e);
+    }
 
     vector<int> sortArray(vector<int>& nums) {
         int n = nums.size();
-        //mergeSort(nums,0,n-1);
 
-        quickSort(nums,0,n-1);
+        // --- Use Merge Sort ---
+        // mergeSort(nums, 0, n - 1);
+
+        // --- Use Quick Sort ---
+        quickSort(nums, 0, n - 1);
 
         return nums;
     }
