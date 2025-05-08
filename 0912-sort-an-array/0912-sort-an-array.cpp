@@ -40,9 +40,47 @@ public:
 
     }
 
+    int findPivotHoaresPartition(vector<int>& nums, int s, int e){
+        int pivot = nums[s];  // Use first element as pivot for Hoare's scheme
+        int i = s - 1;
+        int j = e + 1;
+
+        while(true) {
+            // Move i to the right
+            do {
+                i++;
+            } while(i <= e && nums[i] < pivot);
+
+            // Move j to the left
+            do {
+                j--;
+            } while(j >= s && nums[j] > pivot);
+
+            // If pointers cross, partitioning is done
+            if(i >= j) return j;
+
+            swap(nums[i], nums[j]);
+        }
+    }
+
+    void quickSort(vector<int>& nums, int s, int e){
+        if(s >= e){
+            return;
+        }
+
+        int p = findPivotHoaresPartition(nums, s, e);  // Partition returns the split index
+
+        quickSort(nums, s, p);       // Recur on left part
+        quickSort(nums, p + 1, e);   // Recur on right part
+    }
+
+
     vector<int> sortArray(vector<int>& nums) {
         int n = nums.size();
-        mergeSort(nums,0,n-1);
+        //mergeSort(nums,0,n-1);
+
+        quickSort(nums,0,n-1);
+
         return nums;
     }
 };
