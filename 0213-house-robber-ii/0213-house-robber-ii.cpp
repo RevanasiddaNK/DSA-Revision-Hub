@@ -1,25 +1,33 @@
 class Solution {
 public:
 
-    int solveMem( int i, bool fh, vector<int>& nums, int n, vector<vector<int>>&dp){
+     int solveMem( int i, vector<int>& nums, int n, vector<int>&dp){
 
         if(i >= n)
             return 0;
         
-        if(dp[i][fh] != -1)
-            return dp[i][fh];
-
-        int inc=0, exc=0;
-        if(!(fh && i== n-1))
-            inc = nums[i] + solveMem(i+2, fh, nums, n, dp);
-        exc = solveMem(i+1, fh, nums, n, dp);
-
-        return dp[i][fh] = max(inc, exc);
+        if(dp[i] != -1)
+            return dp[i];
+        
+        int inc = nums[i] + solveMem(i+2, nums, n, dp);
+        int exc = solveMem(i+1, nums, n, dp);
+        return dp[i] = max(inc, exc);
     }
+
+
 
     int rob(vector<int>& nums) {
         int n = nums.size();
-        vector<vector<int>>dp(n+1, vector<int>(2, -1));
-        return max( solveMem(1, 0, nums, n, dp), nums[0] + solveMem(2, 1, nums, n, dp) );
+
+        if(n == 1)
+            return nums[0];
+
+        vector<int>dp1(n+1, -1);
+        int option1 = solveMem( 0, nums, n-1, dp1);
+
+        vector<int>dp2(n+1, -1);
+        int option2 = solveMem( 1, nums, n, dp2);
+        return max(option1, option2);
+        
     }
 };
