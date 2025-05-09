@@ -1,23 +1,22 @@
 class Solution {
 public:
 
-    int solve(vector<int>& nums, int i, int n, vector<int>&dp) {
-        if(i >= n){
-            return 0;
-        }
+    int solveMem( int i, vector<int>& nums, int n, vector<int>&dp){
 
-        if(dp[i] != -1){
+        if(i >= n)
+            return 0;
+        
+        if(dp[i] != -1)
             return dp[i];
-        }
-       
-       int rob = nums[i] +  solve(nums,i+2,n,dp);
-       int leave = 0 +  solve(nums,i+1,n,dp);
-       return dp[i] = max(rob, leave);
+        
+        int inc = nums[i] + solveMem(i+2, nums, n, dp);
+        int exc = solveMem(i+1, nums, n, dp);
+        return dp[i] = max(inc, exc);
     }
 
     int rob(vector<int>& nums) {
         int n = nums.size();
         vector<int>dp(n+1, -1);
-        return  solve(nums,0,n,dp);
+        return solveMem(0, nums, n, dp);
     }
 };
