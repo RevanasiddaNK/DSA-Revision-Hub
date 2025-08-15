@@ -32,13 +32,13 @@ public:
     }
 
     int climbStairs(int n) {
-        
+
         if(n == 0)
             return 0;
 
         vector<int>dp(n+1, -1);
         //return climbStairsMem(n, dp);
-        //return solveTab(n);
+        return solveTab(n);
         return solveSpaceOpt(n);
     }
 };
