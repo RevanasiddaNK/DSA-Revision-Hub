@@ -21,7 +21,7 @@ public:
 
             int pn1 = find(n1);
             int pn2 = find(n2);
-
+            // attach smaller tree under bigger tree
             if( rank[pn1] < rank[pn2] ){
                 parent[pn1] = pn2;
             }else if(rank[pn1] > rank[pn2]){
@@ -51,7 +51,7 @@ public:
 
         int np = 0;
         for(int i=0; i<n; i++){
-            if(dsu.find(i) == i)
+            if(dsu.parent[i] == i)
                 np++;
         }
         return np;
