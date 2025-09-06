@@ -1,30 +1,21 @@
 class Solution {
 public:
 
-    int solveMem(int i, vector<int>& nums, bool alarm, vector<vector<int>>&dp ){
-        if(i < 0){
+    int solveMem(vector<int>& nums, int h, int n, vector<int>&dp){
+        if(h >= n)
             return 0;
-        }
+            
+        if(dp[h] != -1) return dp[h];
 
-        if(dp[i][alarm] != -1){
-            return dp[i][alarm];
-        }
+        int inc = nums[h] + solveMem(nums, h+2, n, dp);
+        int exc = solveMem(nums, h+1, n, dp);
 
-        int money = 0;
-        if(alarm){
-            money = solveMem(i-1, nums, !alarm, dp );
-        }else{
-            int steal = nums[i] + solveMem(i-1, nums, !alarm, dp );
-            int notSteal = solveMem(i-1, nums, alarm, dp );
-            money = max(steal,notSteal );
-        }
-        return dp[i][alarm] = money;
-    }
+        return dp[h] = max(inc, exc);
+    } 
 
     int rob(vector<int>& nums) {
         int n = nums.size();
-        vector<vector<int>>dp(n+1, vector<int>(2, -1) );
-        bool alarm = false;
-        return solveMem(n-1, nums, alarm, dp );
+        vector<int>dp(n+1, -1);
+        return solveMem(nums, 0, n, dp);
     }
 };
